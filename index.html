@@ -581,7 +581,8 @@
     <header class="col hero-header">
         <div class="osu-tag">Dinas Dukcapil Alomani · Citizen ID</div>
         <h1>KTP Discord</h1>
-        <p class="lead">Masukin User ID Discord kamu di bawah, biar langsung dicetakin KTP resminya sama Professor Mornye.</p>
+        <p class="lead">Masukin User ID Discord kamu di bawah, biar langsung dicetakin KTP resminya sama Professor
+            Mornye.</p>
     </header>
 
     <form id="form" class="col">
@@ -682,9 +683,14 @@
                     dalam status aktif.</p>
             </details>
             <details class="faq-item">
-                <summary>Kenapa buat ini web ini, kan sudah punya bot Danyaa dan bisa /ktp?</summary>
+                <summary>Kenapa buat ni web? Kan dh ada bot Danyaa dan bisa command /ktp?</summary>
                 <p>Ceritanya ini buat latihan atau tahap awal produk skripsi ku aja. Mikirin gimana caranya dari web
-                    bisa komunikasi ama bot ku nanti</p>
+                    bisa komunikasi ama bot ku nanti. Trus juga nyoba hosting di Github biar gratis, sebagai gantinya
+                    webnya g ada backend dan yang ngurus workflow n8n ku. Ogah bayar double sementara ini gw wok</p>
+            </details>
+            <details class="faq-item">
+                <summary>Ini AI slop ya bang?</summary>
+                <p>Nggih mas, iki AI Slop, kulo isu kemampuan mas 🥀</p>
             </details>
         </div>
     </section>
@@ -704,7 +710,7 @@
         // ====== PENGATURAN ======
         // Ganti ke /webhook/ktp (Production URL) setelah workflow di-Activate.
         // Kosongkan ("") untuk mode DEMO dengan data palsu.
-        const WEBHOOK_URL = "https://n8n-oqqgdz8wvkuy.jkt2.sumopod.my.id/webhook-test/ktp";
+        const WEBHOOK_URL = "https://n8n-oqqgdz8wvkuy.jkt2.sumopod.my.id/webhook/ktp";
         const CACHE_MS = 5 * 60 * 1000;   // hasil disimpan 5 menit di browser
         const COOLDOWN_MS = 3000;         // jeda antar request ke n8n
         // ========================
