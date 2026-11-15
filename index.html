@@ -15,8 +15,6 @@
             --bg: #e9eef1;
             --ink: #17283a;
             --muted: #4d6478;
-            --card-a: #d6e8f2;
-            --card-b: #a9cfe0;
             --line: #6f9bb5;
             --accent: #b3261e;
             --font: "Barlow Semi Condensed", "Arial Narrow", sans-serif;
@@ -48,41 +46,62 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 28px;
-            padding: 40px 16px 56px;
+            gap: 32px;
+            padding: 64px 20px 80px;
+        }
+
+        .col {
+            width: min(600px, 100%);
         }
 
         h1 {
-            font-size: 1.5rem;
-            margin: 0;
+            font-size: 1.75rem;
+            margin: 0 0 8px;
             font-weight: 700;
         }
 
         .lead {
-            margin: 6px 0 0;
+            margin: 0;
             color: var(--muted);
-            max-width: 46ch;
-        }
-
-        .head {
-            width: min(560px, 100%);
+            font-size: 1.05rem;
+            line-height: 1.5;
+            max-width: 50ch;
         }
 
         form {
             display: flex;
-            gap: 8px;
-            width: min(560px, 100%);
+            gap: 12px;
         }
 
         input {
             flex: 1;
             min-width: 0;
             font: 600 1.05rem var(--mono);
-            padding: 12px 14px;
+            padding: 14px 16px;
             border: 2px solid var(--line);
-            border-radius: 6px;
+            border-radius: 8px;
             background: transparent;
             color: var(--ink);
+        }
+
+        button {
+            font: 700 1rem var(--font);
+            padding: 14px 24px;
+            border: 2px solid var(--ink);
+            border-radius: 8px;
+            background: var(--ink);
+            color: var(--bg);
+            cursor: pointer;
+        }
+
+        button.ghost {
+            background: transparent;
+            color: var(--ink);
+        }
+
+        button[disabled] {
+            opacity: .5;
+            cursor: not-allowed;
         }
 
         input:focus-visible,
@@ -91,24 +110,9 @@
             outline-offset: 2px;
         }
 
-        button {
-            font: 700 1rem var(--font);
-            padding: 12px 20px;
-            border: 0;
-            border-radius: 6px;
-            background: var(--ink);
-            color: var(--bg);
-            cursor: pointer;
-        }
-
-        button[disabled] {
-            opacity: .5;
-            cursor: wait;
-        }
-
         #status {
-            width: min(560px, 100%);
-            min-height: 1.4em;
+            min-height: 1.5em;
+            margin-top: -12px;
             color: var(--muted);
         }
 
@@ -117,67 +121,82 @@
             font-weight: 600;
         }
 
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+        }
+
         /* ---------- Kartu ---------- */
         .wrap {
-            width: min(560px, 100%);
             container-type: inline-size;
         }
 
         .ktp {
             aspect-ratio: 85.6 / 54;
             border-radius: 3.2cqw;
-            padding: 3.2cqw 4cqw;
+            padding: 4.6cqw 5cqw 4cqw;
             color: #17283a;
             background:
-                repeating-radial-gradient(circle at 78% 120%, transparent 0 5px, rgba(111, 155, 181, .22) 5px 6px),
-                repeating-radial-gradient(circle at 10% -20%, transparent 0 7px, rgba(111, 155, 181, .18) 7px 8px),
-                linear-gradient(135deg, var(--card-a), var(--card-b));
-            box-shadow: 0 1px 0 #fff8 inset, 0 10px 30px -12px #0006;
+                repeating-radial-gradient(circle at 78% 120%, transparent 0 6px, rgba(111, 155, 181, .22) 6px 7px),
+                linear-gradient(135deg, #d6e8f2, #a9cfe0);
+            box-shadow: 0 1px 0 #fff8 inset, 0 14px 34px -14px #0007;
             display: grid;
-            grid-template-columns: 1fr 27cqw;
+            grid-template-columns: 1fr 26cqw;
             grid-template-rows: auto 1fr;
-            column-gap: 3cqw;
+            column-gap: 4cqw;
             font-size: 2.9cqw;
             line-height: 1.25;
-            transition: opacity .25s;
+            transition: opacity .3s;
         }
 
         .ktp.empty {
             opacity: .45;
         }
 
-        .ktp .title {
+        .ktp.loading {
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            50% {
+                opacity: .65;
+            }
+        }
+
+        .title {
             grid-column: 1 / -1;
             text-align: center;
             font-weight: 700;
             font-size: 4cqw;
-            letter-spacing: .02em;
             line-height: 1.1;
+            margin-bottom: 3.5cqw;
         }
 
-        .ktp .title small {
+        .title small {
             display: block;
-            font-size: 3.4cqw;
+            font-size: 3cqw;
             font-weight: 600;
         }
 
         .nik-label {
             font-weight: 600;
-            margin-top: 1.2cqw;
+            font-size: 2.8cqw;
         }
 
         .nik {
-            font: 600 5.6cqw var(--mono);
-            letter-spacing: .04em;
-            margin: .3cqw 0 1.4cqw;
-            word-break: break-all;
+            font: 600 4.3cqw/1.2 var(--mono);
+            letter-spacing: .02em;
+            margin: .5cqw 0 2.5cqw;
+            white-space: nowrap;
         }
 
         dl {
             margin: 0;
             display: grid;
-            grid-template-columns: 17cqw 1.5cqw 1fr;
-            row-gap: .5cqw;
+            grid-template-columns: 25cqw 2cqw 1fr;
+            row-gap: 1.1cqw;
         }
 
         dt {
@@ -190,17 +209,13 @@
             overflow-wrap: anywhere;
         }
 
-        dl .sep {
-            margin: 0;
-        }
-
         .photo {
             grid-column: 2;
             grid-row: 2;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1.2cqw;
+            gap: 1.6cqw;
         }
 
         .photo img {
@@ -211,13 +226,9 @@
             background: #fff8;
         }
 
-        .photo .berlaku {
+        .berlaku {
             font-size: 2.3cqw;
             text-align: center;
-        }
-
-        .ktp .stamp {
-            position: absolute;
         }
 
         .badge {
@@ -225,18 +236,31 @@
             font-weight: 700;
             color: var(--accent);
             border: .3cqw solid var(--accent);
-            padding: 0 1.2cqw;
+            padding: 0 1.4cqw;
             border-radius: .8cqw;
-            font-size: 2.2cqw;
-            margin-top: .8cqw;
+            font-size: 2.3cqw;
+            margin-top: 1.6cqw;
         }
 
         [hidden] {
             display: none !important;
         }
 
+        @media (max-width: 480px) {
+            form {
+                flex-direction: column;
+            }
+
+            body {
+                padding-top: 40px;
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
-            .ktp {
+
+            .ktp,
+            .ktp.loading {
+                animation: none;
                 transition: none;
             }
         }
@@ -245,80 +269,103 @@
 
 <body>
 
-    <div class="head">
+    <div class="col">
         <h1>KTP Discord</h1>
         <p class="lead">Masukkan User ID Discord. Data diambil lewat webhook n8n, lalu ditampilkan sebagai kartu.</p>
     </div>
 
-    <form id="form">
+    <form id="form" class="col">
         <input id="userId" inputmode="numeric" autocomplete="off" placeholder="User ID, contoh 123456789012345678"
             aria-label="User ID Discord">
         <button id="btn" type="submit">Buat KTP</button>
     </form>
-    <div id="status" role="status" aria-live="polite"></div>
+    <div id="status" class="col" role="status" aria-live="polite"></div>
 
-    <div class="wrap">
-        <article class="ktp empty" id="card" aria-label="Kartu KTP Discord">
-            <div class="title">REPUBLIK DISCORD<small>PROVINSI SERVER UTAMA</small></div>
-            <div>
-                <div class="nik-label">NIK</div>
-                <div class="nik" id="nik">0000000000000000000</div>
-                <dl>
-                    <dt>Nama</dt>
-                    <dd class="sep">:</dd>
-                    <dd id="nama">-</dd>
-                    <dt>Username</dt>
-                    <dd class="sep">:</dd>
-                    <dd id="username">-</dd>
-                    <dt>Tgl Lahir</dt>
-                    <dd class="sep">:</dd>
-                    <dd id="tglLahir">-</dd>
-                    <dt>Kewarganegaraan</dt>
-                    <dd class="sep">:</dd>
-                    <dd>WARGA DISCORD</dd>
-                    <dt>Berlaku Hingga</dt>
-                    <dd class="sep">:</dd>
-                    <dd>SEUMUR HIDUP</dd>
-                </dl>
-                <span class="badge" id="bot" hidden>BOT</span>
-            </div>
-            <div class="photo">
-                <img id="foto" alt="Foto profil"
-                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-                <div class="berlaku" id="tglTerbit"></div>
-            </div>
-        </article>
+    <div class="col">
+        <div class="wrap">
+            <article class="ktp empty" id="card" aria-label="Kartu KTP Discord">
+                <div class="title">REPUBLIK DISCORD<small>PROVINSI SERVER UTAMA</small></div>
+                <div>
+                    <div class="nik-label">NIK</div>
+                    <div class="nik" id="nik">000000000000000000</div>
+                    <dl>
+                        <dt>Nama</dt>
+                        <dd>:</dd>
+                        <dd id="nama">-</dd>
+                        <dt>Username</dt>
+                        <dd>:</dd>
+                        <dd id="username">-</dd>
+                        <dt>Tgl Lahir</dt>
+                        <dd>:</dd>
+                        <dd id="tglLahir">-</dd>
+                        <dt>Kewarganegaraan</dt>
+                        <dd>:</dd>
+                        <dd>WARGA DISCORD</dd>
+                        <dt>Berlaku Hingga</dt>
+                        <dd>:</dd>
+                        <dd>SEUMUR HIDUP</dd>
+                    </dl>
+                    <span class="badge" id="bot" hidden>BOT</span>
+                </div>
+                <div class="photo">
+                    <img id="foto" alt="Foto profil"
+                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                    <div class="berlaku" id="tglTerbit"></div>
+                </div>
+            </article>
+        </div>
+        <div class="actions" id="actions" hidden>
+            <button type="button" id="dl">Unduh PNG</button>
+            <button type="button" id="share" class="ghost">Salin tautan</button>
+        </div>
     </div>
 
     <script>
         // ====== PENGATURAN ======
-        // Isi dengan Production URL webhook n8n (bukan /webhook-test/).
-        // Kosongkan ("") untuk mode DEMO: pakai data palsu supaya tampilan bisa dicoba dulu.
+        // Ganti ke /webhook/ktp (Production URL) setelah workflow di-Activate.
+        // Kosongkan ("") untuk mode DEMO dengan data palsu.
         const WEBHOOK_URL = "https://n8n-oqqgdz8wvkuy.jkt2.sumopod.my.id/webhook-test/ktp";
+        const CACHE_MS = 5 * 60 * 1000;   // hasil disimpan 5 menit di browser
+        const COOLDOWN_MS = 3000;         // jeda antar request ke n8n
         // ========================
 
         const $ = (id) => document.getElementById(id);
-        const form = $("form"), btn = $("btn"), statusEl = $("status"), card = $("card");
+        const form = $("form"), btn = $("btn"), statusEl = $("status"), card = $("card"), actions = $("actions");
+        let current = null;
 
         function setStatus(msg, isError = false) {
             statusEl.textContent = msg;
             statusEl.classList.toggle("error", isError);
         }
 
+        // ---- cache sederhana (sessionStorage) ----
+        function cacheGet(id) {
+            try {
+                const r = JSON.parse(sessionStorage.getItem("ktp:" + id));
+                if (r && Date.now() - r.t < CACHE_MS) return r.d;
+            } catch { }
+            return null;
+        }
+        function cacheSet(id, d) {
+            try { sessionStorage.setItem("ktp:" + id, JSON.stringify({ t: Date.now(), d })); } catch { }
+        }
+
         function render(d) {
+            current = d;
             $("nik").textContent = d.nik;
             $("nama").textContent = (d.nama || "-").toUpperCase();
             $("username").textContent = "@" + d.username;
             $("tglLahir").textContent = d.tglLahir;
-            $("tglTerbit").textContent = d.tglTerbit ? "Diterbitkan\n" + d.tglTerbit : "";
+            $("tglTerbit").textContent = "Diterbitkan " + (d.tglTerbit || new Date().toLocaleDateString("id-ID"));
             $("bot").hidden = !d.bot;
             $("foto").src = d.fotoUrl;
             card.classList.remove("empty");
+            actions.hidden = false;
         }
 
         async function ambilKTP(userId) {
             if (!WEBHOOK_URL) {
-                await new Promise((r) => setTimeout(r, 600)); // pura-pura loading
+                await new Promise((r) => setTimeout(r, 600));
                 return {
                     nik: userId, nama: "Nama Contoh", username: "contoh_user",
                     tglLahir: "01-01-2020", tglTerbit: new Date().toLocaleDateString("id-ID"),
@@ -330,6 +377,7 @@
             try {
                 const res = await fetch(`${WEBHOOK_URL}?userId=${encodeURIComponent(userId)}`, { signal: ctrl.signal });
                 if (res.status === 404) throw new Error("User tidak ditemukan.");
+                if (res.status === 429) throw new Error("Terlalu banyak permintaan. Coba lagi sebentar.");
                 if (!res.ok) throw new Error(`Server membalas ${res.status}.`);
                 return await res.json();
             } finally {
@@ -337,26 +385,117 @@
             }
         }
 
-        form.addEventListener("submit", async (e) => {
+        async function cari(userId) {
+            const cached = cacheGet(userId);
+            if (cached) { render(cached); setStatus(""); return; }
+
+            btn.disabled = true;
+            card.classList.add("loading");
+            setStatus(WEBHOOK_URL ? "Mengambil data dari n8n..." : "Mode demo: memakai data contoh...");
+            try {
+                const d = await ambilKTP(userId);
+                cacheSet(userId, d);
+                render(d);
+                setStatus("");
+            } catch (err) {
+                const msg = err.name === "AbortError" ? "n8n tidak menjawab dalam 15 detik." :
+                    err instanceof TypeError ? "Gagal terhubung. Cek URL webhook, HTTPS, CORS, dan apakah n8n sedang Listen (webhook-test)." :
+                        err.message;
+                setStatus(msg, true);
+            } finally {
+                card.classList.remove("loading");
+                setTimeout(() => (btn.disabled = false), COOLDOWN_MS);
+            }
+        }
+
+        form.addEventListener("submit", (e) => {
             e.preventDefault();
             const userId = $("userId").value.trim();
             if (!/^\d{17,20}$/.test(userId)) {
                 setStatus("User ID harus berupa angka 17-20 digit.", true);
                 return;
             }
-            btn.disabled = true;
-            setStatus(WEBHOOK_URL ? "Mengambil data dari n8n..." : "Mode demo: memakai data contoh...");
-            try {
-                render(await ambilKTP(userId));
-                setStatus("");
-            } catch (err) {
-                const msg = err.name === "AbortError" ? "n8n tidak menjawab dalam 15 detik." :
-                    err instanceof TypeError ? "Gagal terhubung. Cek URL webhook, HTTPS, dan pengaturan CORS di n8n." :
-                        err.message;
-                setStatus(msg, true);
-            } finally {
-                btn.disabled = false;
+            cari(userId);
+        });
+
+        // ---- buka langsung lewat tautan ?id=... ----
+        const qid = new URLSearchParams(location.search).get("id");
+        if (qid && /^\d{17,20}$/.test(qid)) { $("userId").value = qid; cari(qid); }
+
+        $("share").addEventListener("click", async () => {
+            if (!current) return;
+            const url = `${location.origin}${location.pathname}?id=${current.nik}`;
+            try { await navigator.clipboard.writeText(url); setStatus("Tautan disalin."); }
+            catch { setStatus(url); }
+        });
+
+        // ---- unduh PNG: kartu digambar ulang di canvas ----
+        const loadImg = (src) => new Promise((res) => {
+            const i = new Image(); i.crossOrigin = "anonymous";
+            i.onload = () => res(i); i.onerror = () => res(null); i.src = src;
+        });
+
+        async function gambarKartu(d) {
+            await Promise.all([
+                document.fonts.load('700 40px "Barlow Semi Condensed"'),
+                document.fonts.load('600 40px "Barlow Semi Condensed"'),
+                document.fonts.load('400 40px "Barlow Semi Condensed"'),
+                document.fonts.load('600 40px "Overpass Mono"')
+            ]);
+            const foto = await loadImg(d.fotoUrl);
+            const W = 1712, H = 1080, u = W / 100;
+            const c = document.createElement("canvas"); c.width = W; c.height = H;
+            const g = c.getContext("2d");
+            g.beginPath(); g.roundRect(0, 0, W, H, 3.2 * u); g.clip();
+            const gr = g.createLinearGradient(0, 0, W, H);
+            gr.addColorStop(0, "#d6e8f2"); gr.addColorStop(1, "#a9cfe0");
+            g.fillStyle = gr; g.fillRect(0, 0, W, H);
+            g.strokeStyle = "rgba(111,155,181,.22)"; g.lineWidth = 2;
+            for (let r = 12; r < W * 1.3; r += 14) { g.beginPath(); g.arc(W * .78, H * 1.2, r, 0, 7); g.stroke(); }
+
+            const F = '"Barlow Semi Condensed", sans-serif', ink = "#17283a";
+            const px = 5 * u, py = 4.6 * u;
+            g.fillStyle = ink; g.textBaseline = "top"; g.textAlign = "center";
+            g.font = `700 ${4 * u}px ${F}`; g.fillText("REPUBLIK DISCORD", W / 2, py);
+            g.font = `600 ${3 * u}px ${F}`; g.fillText("PROVINSI SERVER UTAMA", W / 2, py + 4.4 * u);
+
+            g.textAlign = "left";
+            const top = py + 11.5 * u;
+            g.font = `600 ${2.8 * u}px ${F}`; g.fillText("NIK", px, top);
+            g.font = `600 ${4.3 * u}px "Overpass Mono", monospace`; g.fillText(d.nik, px, top + 4 * u);
+            const rows = [
+                ["Nama", (d.nama || "-").toUpperCase()], ["Username", "@" + d.username],
+                ["Tgl Lahir", d.tglLahir], ["Kewarganegaraan", "WARGA DISCORD"], ["Berlaku Hingga", "SEUMUR HIDUP"]
+            ];
+            rows.forEach(([k, v], i) => {
+                const y = top + 11.7 * u + i * 4.7 * u;
+                g.font = `400 ${2.9 * u}px ${F}`; g.fillText(k, px, y); g.fillText(":", px + 25 * u, y);
+                g.font = `700 ${2.9 * u}px ${F}`; g.fillText(v, px + 27 * u, y);
+            });
+
+            const pw = 26 * u, ph = pw * 4 / 3, fx = W - 5 * u - pw;
+            g.fillStyle = "rgba(255,255,255,.5)"; g.fillRect(fx, top, pw, ph);
+            if (foto) {
+                const r = Math.max(pw / foto.width, ph / foto.height), sw = pw / r, sh = ph / r;
+                g.drawImage(foto, (foto.width - sw) / 2, (foto.height - sh) / 2, sw, sh, fx, top, pw, ph);
             }
+            g.strokeStyle = "#6f9bb5"; g.lineWidth = .4 * u; g.strokeRect(fx, top, pw, ph);
+            g.fillStyle = ink; g.textAlign = "center"; g.font = `400 ${2.3 * u}px ${F}`;
+            g.fillText("Diterbitkan " + (d.tglTerbit || ""), fx + pw / 2, top + ph + 1.6 * u);
+            return c;
+        }
+
+        $("dl").addEventListener("click", async () => {
+            if (!current) return;
+            $("dl").disabled = true;
+            try {
+                const c = await gambarKartu(current);
+                const a = document.createElement("a");
+                a.href = c.toDataURL("image/png");
+                a.download = `ktp-${current.username}.png`;
+                a.click();
+            } catch { setStatus("Gagal membuat gambar.", true); }
+            finally { $("dl").disabled = false; }
         });
     </script>
 </body>
