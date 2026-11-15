@@ -615,12 +615,12 @@
                         <dt>Jenis Akun</dt>
                         <dd>:</dd>
                         <dd class="split-dd">
-                            <b id="jenisAkun">WARGA BIASA</b>
+                            <b id="jenisAkun">IMANITY</b>
                             <span>Gol. Darah : <b>-</b></span>
                         </dd>
                         <dt>Alamat</dt>
                         <dd>:</dd>
-                        <dd>SERVER DISCORD RAYA</dd>
+                        <dd>General-vc</dd>
                         <dt class="sub">RT/RW</dt>
                         <dd>:</dd>
                         <dd>001/001</dd>
@@ -742,7 +742,7 @@
             $("nama").textContent = (d.nama || "-").toUpperCase();
             $("username").textContent = "@" + d.username;
             $("tglLahir").textContent = "DISCORD, " + (d.tglLahir || "-");
-            $("jenisAkun").textContent = d.bot ? "AKUN BOT" : "WARGA BIASA";
+            $("jenisAkun").textContent = d.bot ? "AKUN BOT" : "IMANITY";
             $("tglTerbit").textContent = d.tglTerbit || new Date().toLocaleDateString("id-ID");
             $("ttd").textContent = d.username || "warga";
             $("bot").hidden = !d.bot;
@@ -879,8 +879,8 @@
                 { k: "Nama", v: (d.nama || "-").toUpperCase() },
                 { k: "Username", v: "@" + d.username },
                 { k: "Tempat/Tgl Lahir", v: "DISCORD, " + (d.tglLahir || "-") },
-                { k: "Jenis Akun", v: d.bot ? "AKUN BOT" : "WARGA BIASA", extra: "Gol. Darah : -" },
-                { k: "Alamat", v: "SERVER DISCORD RAYA" },
+                { k: "Jenis Akun", v: d.bot ? "AKUN BOT" : "IMANITY", extra: "Gol. Darah : -" },
+                { k: "Alamat", v: "General-vc" },
                 { k: "RT/RW", v: "001/001", sub: true },
                 { k: "Kel/Desa", v: "VOICE CHANNEL", sub: true },
                 { k: "Pekerjaan", v: d.bot ? "WARGA DISCORD (BOT)" : "WARGA DISCORD" },
