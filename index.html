@@ -8,25 +8,27 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;600;700&family=Overpass+Mono:wght@600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;600;700&family=Nunito:ital,wght@0,600;0,700;0,800;1,700&family=Overpass+Mono:wght@600&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --bg: #e9eef1;
-            --ink: #17283a;
-            --muted: #4d6478;
-            --line: #6f9bb5;
-            --accent: #b3261e;
-            --font: "Barlow Semi Condensed", "Arial Narrow", sans-serif;
+            /* Tema UI Modern Dukcapil / Digital ID (Struktur sleek, nuansa KTP) */
+            --bg-deep: #0b1522;
+            --bg-panel: rgba(20, 36, 56, 0.84);
+            --bg-panel-hover: rgba(28, 49, 74, 0.94);
+            --ink: #f0f6fc;
+            --muted: #9ab3c9;
+            --ktp-blue: #0ea5e9;
+            --ktp-blue-glow: rgba(14, 165, 233, 0.38);
+            --ktp-cyan: #38bdf8;
+            --ktp-cyan-glow: rgba(56, 189, 248, 0.28);
+            --garuda-gold: #f59e0b;
+            --ktp-red: #e11d48;
+            --line: rgba(56, 189, 248, 0.25);
+            --accent: #ef4444;
+            --ui-font: "Nunito", system-ui, -apple-system, sans-serif;
+            --ktp-font: "Barlow Semi Condensed", "Arial Narrow", sans-serif;
             --mono: "Overpass Mono", ui-monospace, monospace;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #0f1a24;
-                --ink: #e8f0f5;
-                --muted: #97aebf;
-            }
         }
 
         * {
@@ -39,120 +41,231 @@
         }
 
         body {
-            background: var(--bg);
+            background-color: var(--bg-deep);
+            /* Background nuansa Dokumen Negara / e-KTP: Navy gelap + cahaya biru KTP & emas + pola guilloche halus */
+            background-image:
+                radial-gradient(circle at 15% 10%, rgba(14, 165, 233, 0.16) 0%, transparent 45%),
+                radial-gradient(circle at 85% 20%, rgba(245, 158, 11, 0.09) 0%, transparent 45%),
+                radial-gradient(circle at 50% 95%, rgba(56, 189, 248, 0.12) 0%, transparent 50%),
+                repeating-radial-gradient(circle at 0% 0%, transparent 0 28px, rgba(56, 189, 248, 0.025) 28px 29px),
+                repeating-radial-gradient(circle at 100% 100%, transparent 0 34px, rgba(245, 158, 11, 0.02) 34px 35px);
+            background-attachment: fixed;
             color: var(--ink);
-            font-family: var(--font);
+            font-family: var(--ui-font);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 32px;
-            padding: 64px 20px 80px;
+            gap: 26px;
+            padding: 52px 20px 72px;
         }
 
         .col {
-            width: min(600px, 100%);
+            width: min(620px, 100%);
+        }
+
+        /* Header Panel nuansa Portal Dukcapil Modern */
+        .hero-header {
+            background: var(--bg-panel);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-left: 5px solid var(--ktp-blue);
+            border-radius: 16px;
+            padding: 20px 24px;
+            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-header::after {
+            content: "";
+            position: absolute;
+            right: -20px;
+            top: -30px;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.18), transparent 70%);
+            pointer-events: none;
+        }
+
+        .osu-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #fbbf24;
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.32);
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 8px;
+        }
+
+        .osu-tag::before {
+            content: "★";
+            color: #fbbf24;
+            font-size: 0.75rem;
         }
 
         h1 {
-            font-size: 1.75rem;
-            margin: 0 0 8px;
-            font-weight: 700;
+            font-size: 1.9rem;
+            margin: 0 0 6px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            background: linear-gradient(90deg, #ffffff 0%, #bae6fd 55%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .lead {
             margin: 0;
             color: var(--muted);
-            font-size: 1.05rem;
+            font-size: 1rem;
             line-height: 1.5;
-            max-width: 50ch;
         }
 
+        /* Form Input & Tombol */
         form {
             display: flex;
             gap: 12px;
+            background: var(--bg-panel);
+            backdrop-filter: blur(12px);
+            padding: 10px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            box-shadow: 0 10px 26px -10px rgba(0, 0, 0, 0.5);
         }
 
         input {
             flex: 1;
             min-width: 0;
-            font: 600 1.05rem var(--mono);
-            padding: 14px 16px;
-            border: 2px solid var(--line);
-            border-radius: 8px;
-            background: transparent;
+            font: 600 1.02rem var(--mono);
+            padding: 12px 16px;
+            border: 2px solid transparent;
+            border-radius: 11px;
+            background: rgba(9, 18, 30, 0.7);
             color: var(--ink);
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        input::placeholder {
+            color: rgba(154, 179, 201, 0.48);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--ktp-cyan);
+            background: rgba(9, 18, 30, 0.92);
+            box-shadow: 0 0 14px var(--ktp-cyan-glow);
         }
 
         button {
-            font: 700 1rem var(--font);
-            padding: 14px 24px;
-            border: 2px solid var(--ink);
-            border-radius: 8px;
-            background: var(--ink);
-            color: var(--bg);
+            font: 800 1rem var(--ui-font);
+            letter-spacing: 0.02em;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 11px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: #fff;
             cursor: pointer;
+            box-shadow: 0 4px 16px var(--ktp-blue-glow);
+            transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s, filter 0.18s;
+        }
+
+        button:hover:not([disabled]) {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 22px rgba(14, 165, 233, 0.6);
+            filter: brightness(1.08);
+        }
+
+        button:active:not([disabled]) {
+            transform: translateY(0) scale(0.98);
         }
 
         button.ghost {
-            background: transparent;
-            color: var(--ink);
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--ktp-cyan);
+            border: 1.5px solid rgba(56, 189, 248, 0.35);
+            box-shadow: none;
+        }
+
+        button.ghost:hover:not([disabled]) {
+            background: rgba(56, 189, 248, 0.2);
+            box-shadow: 0 4px 16px var(--ktp-cyan-glow);
         }
 
         button[disabled] {
-            opacity: .5;
+            opacity: .45;
             cursor: not-allowed;
-        }
-
-        input:focus-visible,
-        button:focus-visible {
-            outline: 3px solid var(--accent);
-            outline-offset: 2px;
+            box-shadow: none;
         }
 
         #status {
-            min-height: 1.5em;
+            min-height: 1.4em;
             margin-top: -12px;
-            color: var(--muted);
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--ktp-cyan);
+            padding-left: 6px;
         }
 
         #status.error {
-            color: var(--accent);
-            font-weight: 600;
+            color: #fb7185;
         }
 
         .actions {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
-            margin-top: 4px;
+            margin-top: 14px;
         }
 
-        /* ---------- Kartu ---------- */
+        /* ---------- Kartu e-KTP (Lebih Terang seperti KTP IRL) ---------- */
         .wrap {
             container-type: inline-size;
         }
 
         .ktp {
+            font-family: var(--ktp-font);
             aspect-ratio: 85.6 / 54;
             border-radius: 3.2cqw;
-            padding: 4.6cqw 5cqw 4cqw;
-            color: #17283a;
+            padding: 3.6cqw 4.5cqw 3.4cqw;
+            color: #0b1e30;
+            /* Warna biru langit cerah khas blangko e-KTP Indonesia IRL */
             background:
-                repeating-radial-gradient(circle at 78% 120%, transparent 0 6px, rgba(111, 155, 181, .22) 6px 7px),
-                linear-gradient(135deg, #d6e8f2, #a9cfe0);
-            box-shadow: 0 1px 0 #fff8 inset, 0 14px 34px -14px #0007;
+                radial-gradient(ellipse at 52% 45%, rgba(255, 255, 255, .65) 0%, transparent 62%),
+                repeating-radial-gradient(circle at 75% 115%, transparent 0 5px, rgba(56, 148, 208, .15) 5px 6px),
+                repeating-linear-gradient(-25deg, rgba(255, 255, 255, .22) 0 2px, transparent 2px 7px),
+                linear-gradient(135deg, #f0faff 0%, #c8ecff 46%, #9dd9fa 100%);
+            border: 1.5px solid rgba(255, 255, 255, .88);
+            box-shadow:
+                0 1px 0 #fff inset,
+                0 20px 44px -12px rgba(0, 0, 0, .65),
+                0 0 28px -8px rgba(102, 204, 255, .28);
             display: grid;
-            grid-template-columns: 1fr 26cqw;
-            grid-template-rows: auto 1fr;
-            column-gap: 4cqw;
-            font-size: 2.9cqw;
-            line-height: 1.25;
-            transition: opacity .3s;
+            grid-template-columns: 1fr 24cqw;
+            grid-template-rows: auto auto 1fr;
+            column-gap: 3.5cqw;
+            font-size: 2.35cqw;
+            line-height: 1.22;
+            transition: opacity .3s, transform .3s, box-shadow .3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ktp:not(.empty):hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 1px 0 #fff inset,
+                0 24px 50px -12px rgba(0, 0, 0, .75),
+                0 0 34px -4px rgba(56, 189, 248, .38);
         }
 
         .ktp.empty {
-            opacity: .45;
+            opacity: .72;
         }
 
         .ktp.loading {
@@ -169,38 +282,61 @@
             grid-column: 1 / -1;
             text-align: center;
             font-weight: 700;
-            font-size: 4cqw;
-            line-height: 1.1;
-            margin-bottom: 3.5cqw;
+            font-size: 3.3cqw;
+            letter-spacing: .04em;
+            line-height: 1.12;
+            padding-bottom: 1.2cqw;
+            margin-bottom: 1.4cqw;
+            border-bottom: .28cqw solid rgba(16, 35, 54, .35);
         }
 
         .title small {
             display: block;
-            font-size: 3cqw;
-            font-weight: 600;
+            font-size: 2.75cqw;
+            font-weight: 700;
+            letter-spacing: .03em;
+            margin-top: .2cqw;
+        }
+
+        .nik-row {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 23.5cqw 1.8cqw 1fr;
+            align-items: baseline;
+            margin-bottom: 1.3cqw;
         }
 
         .nik-label {
-            font-weight: 600;
-            font-size: 2.8cqw;
+            font-weight: 700;
+            font-size: 3.1cqw;
+            letter-spacing: .02em;
+        }
+
+        .nik-colon {
+            font-weight: 700;
+            font-size: 3.1cqw;
         }
 
         .nik {
-            font: 600 4.3cqw/1.2 var(--mono);
-            letter-spacing: .02em;
-            margin: .5cqw 0 2.5cqw;
+            font: 600 3.7cqw/1.1 var(--mono);
+            letter-spacing: .03em;
             white-space: nowrap;
         }
 
         dl {
             margin: 0;
             display: grid;
-            grid-template-columns: 25cqw 2cqw 1fr;
-            row-gap: 1.1cqw;
+            grid-template-columns: 23.5cqw 1.8cqw 1fr;
+            row-gap: .75cqw;
+            align-content: start;
         }
 
         dt {
-            font-weight: 400;
+            font-weight: 600;
+        }
+
+        dt.sub {
+            padding-left: 3.2cqw;
         }
 
         dd {
@@ -209,37 +345,208 @@
             overflow-wrap: anywhere;
         }
 
+        .split-dd {
+            display: flex;
+            justify-content: space-between;
+            padding-right: 1cqw;
+        }
+
+        .split-dd span {
+            font-weight: 600;
+        }
+
+        .split-dd b {
+            font-weight: 700;
+        }
+
         .photo {
             grid-column: 2;
-            grid-row: 2;
+            grid-row: 3;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1.6cqw;
+            gap: .7cqw;
         }
 
         .photo img {
             width: 100%;
             aspect-ratio: 3 / 4;
             object-fit: cover;
-            border: .4cqw solid var(--line);
-            background: #fff8;
+            border: .35cqw solid #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+            background: #b3261e;
+        }
+
+        .photo img.bot-bg {
+            background: #0057a8;
         }
 
         .berlaku {
-            font-size: 2.3cqw;
+            font-size: 1.95cqw;
+            font-weight: 700;
             text-align: center;
+            line-height: 1.15;
+        }
+
+        .berlaku small {
+            display: block;
+            font-weight: 600;
+            font-size: 1.8cqw;
+        }
+
+        .ttd {
+            font-family: Georgia, "Times New Roman", serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 2.3cqw;
+            color: rgba(16, 35, 54, .82);
+            margin-top: .2cqw;
+            max-width: 22cqw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .badge {
             display: inline-block;
             font-weight: 700;
-            color: var(--accent);
-            border: .3cqw solid var(--accent);
-            padding: 0 1.4cqw;
-            border-radius: .8cqw;
-            font-size: 2.3cqw;
-            margin-top: 1.6cqw;
+            color: #fff;
+            background: var(--accent);
+            padding: .15cqw 1.1cqw;
+            border-radius: .6cqw;
+            font-size: 1.85cqw;
+            margin-left: .8cqw;
+            vertical-align: middle;
+        }
+
+        /* ---------- FAQ (Sleek Card Panel Style, Nuansa KTP) ---------- */
+        .faq-section {
+            margin-top: 8px;
+        }
+
+        .faq-section h2 {
+            font-size: 1.25rem;
+            margin: 0 0 12px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--ink);
+        }
+
+        .faq-section h2::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 20px;
+            border-radius: 99px;
+            background: linear-gradient(180deg, var(--ktp-cyan), var(--garuda-gold));
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        details.faq-item {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 4px solid rgba(56, 189, 248, 0.45);
+            border-radius: 12px;
+            padding: 13px 18px;
+            background: var(--bg-panel);
+            backdrop-filter: blur(10px);
+            transition: border-color 0.2s, background 0.2s, transform 0.2s;
+        }
+
+        details.faq-item:hover {
+            background: var(--bg-panel-hover);
+            border-left-color: var(--ktp-cyan);
+            transform: translateX(3px);
+        }
+
+        details.faq-item[open] {
+            border-left-color: var(--garuda-gold);
+            background: rgba(24, 44, 68, 0.94);
+        }
+
+        details.faq-item summary {
+            font-weight: 700;
+            font-size: 1.02rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        details.faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.faq-item summary::after {
+            content: "▸";
+            font-family: var(--mono);
+            font-size: 1.15rem;
+            color: var(--ktp-cyan);
+            transition: transform .2s, color .2s;
+        }
+
+        details.faq-item[open] summary::after {
+            transform: rotate(90deg);
+            color: var(--garuda-gold);
+        }
+
+        details.faq-item p {
+            margin: 10px 0 2px;
+            color: var(--muted);
+            line-height: 1.55;
+            font-size: .96rem;
+        }
+
+        /* ---------- Footer ---------- */
+        footer.site-footer {
+            margin-top: auto;
+            padding: 18px 22px;
+            background: rgba(15, 28, 44, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            color: var(--muted);
+            font-size: .92rem;
+        }
+
+        footer.site-footer strong {
+            color: var(--ink);
+        }
+
+        footer.site-footer a {
+            color: var(--ktp-cyan);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.24);
+            transition: background 0.2s, color 0.2s, transform 0.2s, border-color 0.2s;
+        }
+
+        footer.site-footer a:hover {
+            background: var(--ktp-blue);
+            border-color: var(--ktp-cyan);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        footer.site-footer .footer-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         [hidden] {
@@ -252,14 +559,16 @@
             }
 
             body {
-                padding-top: 40px;
+                padding-top: 32px;
             }
         }
 
         @media (prefers-reduced-motion: reduce) {
 
             .ktp,
-            .ktp.loading {
+            .ktp.loading,
+            button,
+            details.faq-item {
                 animation: none;
                 transition: none;
             }
@@ -269,25 +578,29 @@
 
 <body>
 
-    <div class="col">
+    <header class="col hero-header">
+        <div class="osu-tag">Dinas Dukcapil Alomani · Citizen ID</div>
         <h1>KTP Discord</h1>
-        <p class="lead">Masukkan User ID Discord. Data diambil lewat webhook n8n, lalu ditampilkan sebagai kartu.</p>
-    </div>
+        <p class="lead">Masukin User ID Discord kamu di bawah, biar langsung dicetakin KTP resminya sama Professor Mornye.</p>
+    </header>
 
     <form id="form" class="col">
-        <input id="userId" inputmode="numeric" autocomplete="off" placeholder="User ID, contoh 123456789012345678"
+        <input id="userId" inputmode="numeric" autocomplete="off" placeholder="Tempel User ID (17-20 digit angka)..."
             aria-label="User ID Discord">
-        <button id="btn" type="submit">Buat KTP</button>
+        <button id="btn" type="submit">Cetak KTP!</button>
     </form>
     <div id="status" class="col" role="status" aria-live="polite"></div>
 
     <div class="col">
         <div class="wrap">
             <article class="ktp empty" id="card" aria-label="Kartu KTP Discord">
-                <div class="title">REPUBLIK DISCORD<small>PROVINSI SERVER UTAMA</small></div>
-                <div>
+                <div class="title">PROVINSI ALOMANI DISCORD<small>SERVER NO GAME NO LIFE</small></div>
+                <div class="nik-row">
                     <div class="nik-label">NIK</div>
+                    <div class="nik-colon">:</div>
                     <div class="nik" id="nik">000000000000000000</div>
+                </div>
+                <div>
                     <dl>
                         <dt>Nama</dt>
                         <dd>:</dd>
@@ -295,30 +608,97 @@
                         <dt>Username</dt>
                         <dd>:</dd>
                         <dd id="username">-</dd>
-                        <dt>Tgl Lahir</dt>
+                        <dt>Tempat/Tgl Lahir</dt>
                         <dd>:</dd>
-                        <dd id="tglLahir">-</dd>
+                        <dd id="tglLahir">DISCORD, -</dd>
+                        <dt>Jenis Akun</dt>
+                        <dd>:</dd>
+                        <dd class="split-dd">
+                            <b id="jenisAkun">WARGA BIASA</b>
+                            <span>Gol. Darah : <b>-</b></span>
+                        </dd>
+                        <dt>Alamat</dt>
+                        <dd>:</dd>
+                        <dd>SERVER DISCORD RAYA</dd>
+                        <dt class="sub">RT/RW</dt>
+                        <dd>:</dd>
+                        <dd>001/001</dd>
+                        <dt class="sub">Kel/Desa</dt>
+                        <dd>:</dd>
+                        <dd>VOICE CHANNEL</dd>
+                        <dt>Pekerjaan</dt>
+                        <dd>:</dd>
+                        <dd>WARGA DISCORD <span class="badge" id="bot" hidden>BOT</span></dd>
                         <dt>Kewarganegaraan</dt>
                         <dd>:</dd>
-                        <dd>WARGA DISCORD</dd>
+                        <dd>WND</dd>
                         <dt>Berlaku Hingga</dt>
                         <dd>:</dd>
                         <dd>SEUMUR HIDUP</dd>
                     </dl>
-                    <span class="badge" id="bot" hidden>BOT</span>
                 </div>
                 <div class="photo">
                     <img id="foto" alt="Foto profil"
                         src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-                    <div class="berlaku" id="tglTerbit"></div>
+                    <div class="berlaku">
+                        DISCORD
+                        <small id="tglTerbit">00-00-0000</small>
+                    </div>
+                    <div class="ttd" id="ttd">warga</div>
                 </div>
             </article>
         </div>
         <div class="actions" id="actions" hidden>
             <button type="button" id="dl">Unduh PNG</button>
-            <button type="button" id="share" class="ghost">Salin tautan</button>
+            <button type="button" id="share" class="ghost">Salin Link KTP</button>
         </div>
     </div>
+
+    <!-- ====== BAGIAN FAQ (Bisa kamu tambah/edit sesuka hati) ====== -->
+    <!-- Tips: Cukup copy-paste blok <details class="faq-item">...</details> untuk menambah pertanyaan baru -->
+    <section class="col faq-section" aria-label="Pertanyaan Umum">
+        <h2>Pertanyaan Umum (FAQ)</h2>
+        <div class="faq-list">
+            <details class="faq-item">
+                <summary>Cara dapetin User ID nya gimana bang?</summary>
+                <p>Klik kanan aja profile mu trus dipaling bawah ada <b>"Copy user ID".</b> Kalau nggak ada harus
+                    aktifin developer mode dulu</p>
+            </details>
+            <details class="faq-item">
+                <summary>Dari mana data KTP Discord ini diambil?</summary>
+                <p>Ini data publik akun Discord (seperti nama, username, foto profil, dan tanggal pembuatan akun dari
+                    <i>Snowflake ID</i>) terus diambil sama Professor Mornye dan laporin balik ke web ini pakai
+                    <b>n8n</b>.
+                </p>
+            </details>
+            <details class="faq-item">
+                <summary>Aman nggak masukin User ID ke sini?</summary>
+                <p>Aman aja, toh semua orang bisa ambil user ID miliknya sendiri dan orang lain. Ini bukan password atau
+                    yang perlu dirahasiakan</p>
+            </details>
+            <details class="faq-item">
+                <summary>Kenapa muncul pesan gagal terhubung ke server?</summary>
+                <p>Pastikan User ID terdiri dari 17–20 digit angka yang valid, dan pastikan server workflow n8n sedang
+                    dalam status aktif.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Kenapa buat ini web ini, kan sudah punya bot Danyaa dan bisa /ktp?</summary>
+                <p>Ceritanya ini buat latihan atau tahap awal produk skripsi ku aja. Mikirin gimana caranya dari web
+                    bisa komunikasi ama bot ku nanti</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- ====== BAGIAN FOOTER (Tempat naruh credit / link sosmed / info project) ====== -->
+    <footer class="col site-footer">
+        <div>
+            Dibuat oleh <strong>Rins</strong> · dan tukang cetak KTP nya <strong>Professor Mornye</strong>
+        </div>
+        <div class="footer-links">
+            <a href="https://github.com/fikrisalim-ra" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://discord.gg/XRHYYEKdG" target="_blank" rel="noopener">Discord Server</a>
+        </div>
+    </footer>
 
     <script>
         // ====== PENGATURAN ======
@@ -355,9 +735,12 @@
             $("nik").textContent = d.nik;
             $("nama").textContent = (d.nama || "-").toUpperCase();
             $("username").textContent = "@" + d.username;
-            $("tglLahir").textContent = d.tglLahir;
-            $("tglTerbit").textContent = "Diterbitkan " + (d.tglTerbit || new Date().toLocaleDateString("id-ID"));
+            $("tglLahir").textContent = "DISCORD, " + (d.tglLahir || "-");
+            $("jenisAkun").textContent = d.bot ? "AKUN BOT" : "WARGA BIASA";
+            $("tglTerbit").textContent = d.tglTerbit || new Date().toLocaleDateString("id-ID");
+            $("ttd").textContent = d.username || "warga";
             $("bot").hidden = !d.bot;
+            $("foto").classList.toggle("bot-bg", !!d.bot);
             $("foto").src = d.fotoUrl;
             card.classList.remove("empty");
             actions.hidden = false;
@@ -376,9 +759,9 @@
             const timer = setTimeout(() => ctrl.abort(), 15000);
             try {
                 const res = await fetch(`${WEBHOOK_URL}?userId=${encodeURIComponent(userId)}`, { signal: ctrl.signal });
-                if (res.status === 404) throw new Error("User tidak ditemukan.");
-                if (res.status === 429) throw new Error("Terlalu banyak permintaan. Coba lagi sebentar.");
-                if (!res.ok) throw new Error(`Server membalas ${res.status}.`);
+                if (res.status === 404) throw new Error("Waduh, User ID-nya nggak ketemu nih.");
+                if (res.status === 429) throw new Error("Sabar bang, kebanyakan request nih. Coba bentar lagi ya.");
+                if (!res.ok) throw new Error(`Server n8n lagi ngambek (Status ${res.status}).`);
                 return await res.json();
             } finally {
                 clearTimeout(timer);
@@ -391,15 +774,15 @@
 
             btn.disabled = true;
             card.classList.add("loading");
-            setStatus(WEBHOOK_URL ? "Mengambil data dari n8n..." : "Mode demo: memakai data contoh...");
+            setStatus(WEBHOOK_URL ? "Bentar, lagi nyuruh Professor Mornye nyari datanya di n8n..." : "Mode demo: pake data dummy dulu...");
             try {
                 const d = await ambilKTP(userId);
                 cacheSet(userId, d);
                 render(d);
                 setStatus("");
             } catch (err) {
-                const msg = err.name === "AbortError" ? "n8n tidak menjawab dalam 15 detik." :
-                    err instanceof TypeError ? "Gagal terhubung. Cek URL webhook, HTTPS, CORS, dan apakah n8n sedang Listen (webhook-test)." :
+                const msg = err.name === "AbortError" ? "Kelamaan nunggu, n8n nggak nyaut setelah 15 detik." :
+                    err instanceof TypeError ? "Gagal nyambung ke server! Cek dulu workflow n8n-nya udah aktif / listen belum." :
                         err.message;
                 setStatus(msg, true);
             } finally {
@@ -412,7 +795,7 @@
             e.preventDefault();
             const userId = $("userId").value.trim();
             if (!/^\d{17,20}$/.test(userId)) {
-                setStatus("User ID harus berupa angka 17-20 digit.", true);
+                setStatus("User ID itu isinya angka 17–20 digit ya bang, jangan masukin username!", true);
                 return;
             }
             cari(userId);
@@ -425,7 +808,7 @@
         $("share").addEventListener("click", async () => {
             if (!current) return;
             const url = `${location.origin}${location.pathname}?id=${current.nik}`;
-            try { await navigator.clipboard.writeText(url); setStatus("Tautan disalin."); }
+            try { await navigator.clipboard.writeText(url); setStatus("Sip, link KTP udah dicopy ke clipboard!"); }
             catch { setStatus(url); }
         });
 
@@ -447,41 +830,89 @@
             const c = document.createElement("canvas"); c.width = W; c.height = H;
             const g = c.getContext("2d");
             g.beginPath(); g.roundRect(0, 0, W, H, 3.2 * u); g.clip();
+
+            // Background gradasi e-KTP lebih terang seperti blangko IRL
             const gr = g.createLinearGradient(0, 0, W, H);
-            gr.addColorStop(0, "#d6e8f2"); gr.addColorStop(1, "#a9cfe0");
+            gr.addColorStop(0, "#f0faff"); gr.addColorStop(.46, "#c8ecff"); gr.addColorStop(1, "#9dd9fa");
             g.fillStyle = gr; g.fillRect(0, 0, W, H);
-            g.strokeStyle = "rgba(111,155,181,.22)"; g.lineWidth = 2;
-            for (let r = 12; r < W * 1.3; r += 14) { g.beginPath(); g.arc(W * .78, H * 1.2, r, 0, 7); g.stroke(); }
 
-            const F = '"Barlow Semi Condensed", sans-serif', ink = "#17283a";
-            const px = 5 * u, py = 4.6 * u;
+            // Efek highlight cerah di tengah kartu
+            const rad = g.createRadialGradient(W * .52, H * .45, 10, W * .52, H * .45, W * .55);
+            rad.addColorStop(0, "rgba(255,255,255,.65)"); rad.addColorStop(1, "rgba(255,255,255,0)");
+            g.fillStyle = rad; g.fillRect(0, 0, W, H);
+
+            // Pola guilloche melingkar halus
+            g.strokeStyle = "rgba(56,148,208,.16)"; g.lineWidth = 2;
+            for (let r = 12; r < W * 1.3; r += 12) { g.beginPath(); g.arc(W * .75, H * 1.15, r, 0, 7); g.stroke(); }
+
+            const F = '"Barlow Semi Condensed", sans-serif', ink = "#0b1e30";
+            const px = 4.5 * u, py = 3.6 * u;
+
+            // Header Provinsi & Kota
             g.fillStyle = ink; g.textBaseline = "top"; g.textAlign = "center";
-            g.font = `700 ${4 * u}px ${F}`; g.fillText("REPUBLIK DISCORD", W / 2, py);
-            g.font = `600 ${3 * u}px ${F}`; g.fillText("PROVINSI SERVER UTAMA", W / 2, py + 4.4 * u);
+            g.font = `700 ${3.3 * u}px ${F}`; g.fillText("PROVINSI ALOMANI DISCORD", W / 2, py);
+            g.font = `700 ${2.75 * u}px ${F}`; g.fillText("SERVER NO GAME NO LIFE", W / 2, py + 3.8 * u);
 
+            // Garis bawah header
+            const lineY = py + 7.6 * u;
+            g.strokeStyle = "rgba(11,30,48,.35)"; g.lineWidth = .28 * u;
+            g.beginPath(); g.moveTo(px, lineY); g.lineTo(W - px, lineY); g.stroke();
+
+            // Baris NIK sejajar khas KTP
             g.textAlign = "left";
-            const top = py + 11.5 * u;
-            g.font = `600 ${2.8 * u}px ${F}`; g.fillText("NIK", px, top);
-            g.font = `600 ${4.3 * u}px "Overpass Mono", monospace`; g.fillText(d.nik, px, top + 4 * u);
+            const nikY = lineY + 1.4 * u;
+            g.font = `700 ${3.1 * u}px ${F}`;
+            g.fillText("NIK", px, nikY + .3 * u);
+            g.fillText(":", px + 23.5 * u, nikY + .3 * u);
+            g.font = `600 ${3.7 * u}px "Overpass Mono", monospace`;
+            g.fillText(d.nik, px + 25.3 * u, nikY);
+
+            // Daftar biodata KTP
+            const top = nikY + 5.1 * u;
             const rows = [
-                ["Nama", (d.nama || "-").toUpperCase()], ["Username", "@" + d.username],
-                ["Tgl Lahir", d.tglLahir], ["Kewarganegaraan", "WARGA DISCORD"], ["Berlaku Hingga", "SEUMUR HIDUP"]
+                { k: "Nama", v: (d.nama || "-").toUpperCase() },
+                { k: "Username", v: "@" + d.username },
+                { k: "Tempat/Tgl Lahir", v: "DISCORD, " + (d.tglLahir || "-") },
+                { k: "Jenis Akun", v: d.bot ? "AKUN BOT" : "WARGA BIASA", extra: "Gol. Darah : -" },
+                { k: "Alamat", v: "SERVER DISCORD RAYA" },
+                { k: "RT/RW", v: "001/001", sub: true },
+                { k: "Kel/Desa", v: "VOICE CHANNEL", sub: true },
+                { k: "Pekerjaan", v: d.bot ? "WARGA DISCORD (BOT)" : "WARGA DISCORD" },
+                { k: "Kewarganegaraan", v: "WND" },
+                { k: "Berlaku Hingga", v: "SEUMUR HIDUP" }
             ];
-            rows.forEach(([k, v], i) => {
-                const y = top + 11.7 * u + i * 4.7 * u;
-                g.font = `400 ${2.9 * u}px ${F}`; g.fillText(k, px, y); g.fillText(":", px + 25 * u, y);
-                g.font = `700 ${2.9 * u}px ${F}`; g.fillText(v, px + 27 * u, y);
+            rows.forEach((row, i) => {
+                const y = top + i * 3.55 * u;
+                const kx = row.sub ? px + 3.2 * u : px;
+                g.font = `600 ${2.35 * u}px ${F}`;
+                g.fillText(row.k, kx, y);
+                g.fillText(":", px + 23.5 * u, y);
+                g.font = `700 ${2.35 * u}px ${F}`;
+                g.fillText(row.v, px + 25.3 * u, y);
+                if (row.extra) {
+                    g.font = `600 ${2.35 * u}px ${F}`;
+                    g.fillText("Gol. Darah : -", px + 51 * u, y);
+                }
             });
 
-            const pw = 26 * u, ph = pw * 4 / 3, fx = W - 5 * u - pw;
-            g.fillStyle = "rgba(255,255,255,.5)"; g.fillRect(fx, top, pw, ph);
+            // Pasfoto 3x4 dengan latar merah/biru khas KTP
+            const pw = 24 * u, ph = pw * 4 / 3, fx = W - px - pw;
+            g.fillStyle = d.bot ? "#0057a8" : "#b3261e";
+            g.fillRect(fx, top, pw, ph);
             if (foto) {
                 const r = Math.max(pw / foto.width, ph / foto.height), sw = pw / r, sh = ph / r;
                 g.drawImage(foto, (foto.width - sw) / 2, (foto.height - sh) / 2, sw, sh, fx, top, pw, ph);
             }
-            g.strokeStyle = "#6f9bb5"; g.lineWidth = .4 * u; g.strokeRect(fx, top, pw, ph);
-            g.fillStyle = ink; g.textAlign = "center"; g.font = `400 ${2.3 * u}px ${F}`;
-            g.fillText("Diterbitkan " + (d.tglTerbit || ""), fx + pw / 2, top + ph + 1.6 * u);
+            g.strokeStyle = "#ffffff"; g.lineWidth = .35 * u; g.strokeRect(fx, top, pw, ph);
+
+            // Kota, Tanggal Terbit, dan Tanda Tangan di bawah foto
+            g.fillStyle = ink; g.textAlign = "center";
+            g.font = `700 ${1.95 * u}px ${F}`;
+            g.fillText("DISCORD", fx + pw / 2, top + ph + .9 * u);
+            g.font = `600 ${1.8 * u}px ${F}`;
+            g.fillText(d.tglTerbit || "", fx + pw / 2, top + ph + 3.1 * u);
+            g.font = `italic 700 ${2.3 * u}px Georgia, serif`;
+            g.fillText(d.username || "warga", fx + pw / 2, top + ph + 5.5 * u);
             return c;
         }
 
@@ -494,7 +925,7 @@
                 a.href = c.toDataURL("image/png");
                 a.download = `ktp-${current.username}.png`;
                 a.click();
-            } catch { setStatus("Gagal membuat gambar.", true); }
+            } catch { setStatus("Waduh, gagal ngerender gambar PNG-nya.", true); }
             finally { $("dl").disabled = false; }
         });
     </script>
