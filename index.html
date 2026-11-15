@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KTP Discord</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;600;700&family=Overpass+Mono:wght@600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #e9eef1;
+            --ink: #17283a;
+            --muted: #4d6478;
+            --card-a: #d6e8f2;
+            --card-b: #a9cfe0;
+            --line: #6f9bb5;
+            --accent: #b3261e;
+            --font: "Barlow Semi Condensed", "Arial Narrow", sans-serif;
+            --mono: "Overpass Mono", ui-monospace, monospace;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0f1a24;
+                --ink: #e8f0f5;
+                --muted: #97aebf;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+            padding: 40px 16px 56px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .lead {
+            margin: 6px 0 0;
+            color: var(--muted);
+            max-width: 46ch;
+        }
+
+        .head {
+            width: min(560px, 100%);
+        }
+
+        form {
+            display: flex;
+            gap: 8px;
+            width: min(560px, 100%);
+        }
+
+        input {
+            flex: 1;
+            min-width: 0;
+            font: 600 1.05rem var(--mono);
+            padding: 12px 14px;
+            border: 2px solid var(--line);
+            border-radius: 6px;
+            background: transparent;
+            color: var(--ink);
+        }
+
+        input:focus-visible,
+        button:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        button {
+            font: 700 1rem var(--font);
+            padding: 12px 20px;
+            border: 0;
+            border-radius: 6px;
+            background: var(--ink);
+            color: var(--bg);
+            cursor: pointer;
+        }
+
+        button[disabled] {
+            opacity: .5;
+            cursor: wait;
+        }
+
+        #status {
+            width: min(560px, 100%);
+            min-height: 1.4em;
+            color: var(--muted);
+        }
+
+        #status.error {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ---------- Kartu ---------- */
+        .wrap {
+            width: min(560px, 100%);
+            container-type: inline-size;
+        }
+
+        .ktp {
+            aspect-ratio: 85.6 / 54;
+            border-radius: 3.2cqw;
+            padding: 3.2cqw 4cqw;
+            color: #17283a;
+            background:
+                repeating-radial-gradient(circle at 78% 120%, transparent 0 5px, rgba(111, 155, 181, .22) 5px 6px),
+                repeating-radial-gradient(circle at 10% -20%, transparent 0 7px, rgba(111, 155, 181, .18) 7px 8px),
+                linear-gradient(135deg, var(--card-a), var(--card-b));
+            box-shadow: 0 1px 0 #fff8 inset, 0 10px 30px -12px #0006;
+            display: grid;
+            grid-template-columns: 1fr 27cqw;
+            grid-template-rows: auto 1fr;
+            column-gap: 3cqw;
+            font-size: 2.9cqw;
+            line-height: 1.25;
+            transition: opacity .25s;
+        }
+
+        .ktp.empty {
+            opacity: .45;
+        }
+
+        .ktp .title {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-weight: 700;
+            font-size: 4cqw;
+            letter-spacing: .02em;
+            line-height: 1.1;
+        }
+
+        .ktp .title small {
+            display: block;
+            font-size: 3.4cqw;
+            font-weight: 600;
+        }
+
+        .nik-label {
+            font-weight: 600;
+            margin-top: 1.2cqw;
+        }
+
+        .nik {
+            font: 600 5.6cqw var(--mono);
+            letter-spacing: .04em;
+            margin: .3cqw 0 1.4cqw;
+            word-break: break-all;
+        }
+
+        dl {
+            margin: 0;
+            display: grid;
+            grid-template-columns: 17cqw 1.5cqw 1fr;
+            row-gap: .5cqw;
+        }
+
+        dt {
+            font-weight: 400;
+        }
+
+        dd {
+            margin: 0;
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
+
+        dl .sep {
+            margin: 0;
+        }
+
+        .photo {
+            grid-column: 2;
+            grid-row: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2cqw;
+        }
+
+        .photo img {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            border: .4cqw solid var(--line);
+            background: #fff8;
+        }
+
+        .photo .berlaku {
+            font-size: 2.3cqw;
+            text-align: center;
+        }
+
+        .ktp .stamp {
+            position: absolute;
+        }
+
+        .badge {
+            display: inline-block;
+            font-weight: 700;
+            color: var(--accent);
+            border: .3cqw solid var(--accent);
+            padding: 0 1.2cqw;
+            border-radius: .8cqw;
+            font-size: 2.2cqw;
+            margin-top: .8cqw;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ktp {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="head">
+        <h1>KTP Discord</h1>
+        <p class="lead">Masukkan User ID Discord. Data diambil lewat webhook n8n, lalu ditampilkan sebagai kartu.</p>
+    </div>
+
+    <form id="form">
+        <input id="userId" inputmode="numeric" autocomplete="off" placeholder="User ID, contoh 123456789012345678"
+            aria-label="User ID Discord">
+        <button id="btn" type="submit">Buat KTP</button>
+    </form>
+    <div id="status" role="status" aria-live="polite"></div>
+
+    <div class="wrap">
+        <article class="ktp empty" id="card" aria-label="Kartu KTP Discord">
+            <div class="title">REPUBLIK DISCORD<small>PROVINSI SERVER UTAMA</small></div>
+            <div>
+                <div class="nik-label">NIK</div>
+                <div class="nik" id="nik">0000000000000000000</div>
+                <dl>
+                    <dt>Nama</dt>
+                    <dd class="sep">:</dd>
+                    <dd id="nama">-</dd>
+                    <dt>Username</dt>
+                    <dd class="sep">:</dd>
+                    <dd id="username">-</dd>
+                    <dt>Tgl Lahir</dt>
+                    <dd class="sep">:</dd>
+                    <dd id="tglLahir">-</dd>
+                    <dt>Kewarganegaraan</dt>
+                    <dd class="sep">:</dd>
+                    <dd>WARGA DISCORD</dd>
+                    <dt>Berlaku Hingga</dt>
+                    <dd class="sep">:</dd>
+                    <dd>SEUMUR HIDUP</dd>
+                </dl>
+                <span class="badge" id="bot" hidden>BOT</span>
+            </div>
+            <div class="photo">
+                <img id="foto" alt="Foto profil"
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                <div class="berlaku" id="tglTerbit"></div>
+            </div>
+        </article>
+    </div>
+
+    <script>
+        // ====== PENGATURAN ======
+        // Isi dengan Production URL webhook n8n (bukan /webhook-test/).
+        // Kosongkan ("") untuk mode DEMO: pakai data palsu supaya tampilan bisa dicoba dulu.
+        const WEBHOOK_URL = "https://n8n-oqqgdz8wvkuy.jkt2.sumopod.my.id/webhook-test/ktp";
+        // ========================
+
+        const $ = (id) => document.getElementById(id);
+        const form = $("form"), btn = $("btn"), statusEl = $("status"), card = $("card");
+
+        function setStatus(msg, isError = false) {
+            statusEl.textContent = msg;
+            statusEl.classList.toggle("error", isError);
+        }
+
+        function render(d) {
+            $("nik").textContent = d.nik;
+            $("nama").textContent = (d.nama || "-").toUpperCase();
+            $("username").textContent = "@" + d.username;
+            $("tglLahir").textContent = d.tglLahir;
+            $("tglTerbit").textContent = d.tglTerbit ? "Diterbitkan\n" + d.tglTerbit : "";
+            $("bot").hidden = !d.bot;
+            $("foto").src = d.fotoUrl;
+            card.classList.remove("empty");
+        }
+
+        async function ambilKTP(userId) {
+            if (!WEBHOOK_URL) {
+                await new Promise((r) => setTimeout(r, 600)); // pura-pura loading
+                return {
+                    nik: userId, nama: "Nama Contoh", username: "contoh_user",
+                    tglLahir: "01-01-2020", tglTerbit: new Date().toLocaleDateString("id-ID"),
+                    fotoUrl: "https://cdn.discordapp.com/embed/avatars/0.png", bot: false
+                };
+            }
+            const ctrl = new AbortController();
+            const timer = setTimeout(() => ctrl.abort(), 15000);
+            try {
+                const res = await fetch(`${WEBHOOK_URL}?userId=${encodeURIComponent(userId)}`, { signal: ctrl.signal });
+                if (res.status === 404) throw new Error("User tidak ditemukan.");
+                if (!res.ok) throw new Error(`Server membalas ${res.status}.`);
+                return await res.json();
+            } finally {
+                clearTimeout(timer);
+            }
+        }
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const userId = $("userId").value.trim();
+            if (!/^\d{17,20}$/.test(userId)) {
+                setStatus("User ID harus berupa angka 17-20 digit.", true);
+                return;
+            }
+            btn.disabled = true;
+            setStatus(WEBHOOK_URL ? "Mengambil data dari n8n..." : "Mode demo: memakai data contoh...");
+            try {
+                render(await ambilKTP(userId));
+                setStatus("");
+            } catch (err) {
+                const msg = err.name === "AbortError" ? "n8n tidak menjawab dalam 15 detik." :
+                    err instanceof TypeError ? "Gagal terhubung. Cek URL webhook, HTTPS, dan pengaturan CORS di n8n." :
+                        err.message;
+                setStatus(msg, true);
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>
